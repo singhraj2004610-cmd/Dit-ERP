@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-function DropDown2() {
+function DropDown2({ onSelectPage }) {
   const [isAcademicOpen, setIsAcademicOpen] = useState(false);
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
@@ -33,9 +33,12 @@ function DropDown2() {
             {isActivitiesOpen && (
               <div className="mt-2 ml-4 bg-slate-700 rounded-md">
 
-                <div className="p-2 text-white hover:bg-blue-600 cursor-pointer">
+                <button
+                  className="p-3 text-white hover:bg-blue-600 cursor-pointer w-full text-left"
+                  onClick={() => onSelectPage("gradeSheet")}
+                >
                   Grade Sheet
-                </div>
+                </button>
 
               </div>
             )}
