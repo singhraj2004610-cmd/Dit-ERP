@@ -9,15 +9,23 @@ import ADashboard from "./Components/Contents/AlumniDashboard.jsx";
 import PerformanceIndices from "./Components/Contents/PerformanceIndices.jsx";
 import MyCourses from "./Components/Contents/MyCourses.jsx";
 import GradeSheet from "./Components/Contents/Gradesheet.jsx"
+import GStatus from "./Components/Contents/GraduationStatus.jsx"
+import RegConvocation from "./Components/Contents/RegistrationFC.jsx"
 
-function TopHeader() {
+
+function TopHeader({ onLogout }) {
   const [activePage, setActivePage] = useState("dashboard");
   return (
     <div>
       <div
-        className="flex items-center justify-between p-4 bg-slate-700 border-b border-gray-300 sticky top-0 z-50"
+        className="flex items-center justify-between p-2 bg-slate-700 border-b border-gray-300 sticky top-0 z-50"
       >
-        <img className="h-12 w-20" src={logo} alt="Logo" />
+        <div className="flex">
+        <img className="h-10 w-17" src={logo} alt="Logo" />
+         <p className="text-4xl italic font-bold tracking-wide text-white">
+              <span className="italic font-serif lowercase">i</span>Nxt
+            </p>
+            </div>
         <h1 className="text-1xl font-extrabold text-white">
           Welcome{" "}
           <span className="text-yellow-500">1000019238@Dit.Edu.In </span> RAJA
@@ -34,7 +42,9 @@ function TopHeader() {
           onClick={() => setActivePage("dashboard")}>
             Reset
           </button>
-          <button className="hover:bg-red-700 text-white font-bold border border-red-700 py-2 px-4 rounded">
+          <button 
+          onClick={onLogout}
+          className="hover:bg-red-700 text-white font-bold border border-red-700 py-2 px-4 rounded">
             Logout
           </button>
         </div>
@@ -53,9 +63,9 @@ function TopHeader() {
 
             <DropDown1 onSelectPage={setActivePage} />
 
-            <DropDown2 onSelectPage={setActivePage}/>
+            <DropDown2 onSelectPage={setActivePage} />
 
-            <DropDown3 />
+            <DropDown3 onSelectPage={setActivePage} />
 
             <DropDown4 />
 
@@ -71,6 +81,10 @@ function TopHeader() {
           {activePage === "myCourses" && <MyCourses />}
 
           {activePage === "gradeSheet" && <GradeSheet />}
+
+          {activePage === "graduationState" && <GStatus />}
+
+          {activePage === "regconvocation" && <RegConvocation />}
         </main>
 
       </div>

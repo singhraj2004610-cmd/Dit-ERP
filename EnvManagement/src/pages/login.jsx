@@ -1,25 +1,42 @@
-import logo from "./assets/Ditlogo.png";
-
-export default LoginPage = () => {
+const OutLook = ({ onSelectPage, onLoginSuccess }) => {
   return (
-    <div className="flex">
-      <div className="flex flex-rows-3">
-        <div className="flex">
-        <img src={logo} alt="DitLogo" />
-        <p className="text-5xl">iNxt</p>
-        </div>
-        <p>
-          Celebrating <span>25+</span> years of
-        </p>
-        <p>Imagination,Aspiration & Achievement</p>
-      </div>
-      <div className="flex flex-rows-5">
-        <img src={logo} alt="DitLogo" />
-        <p>Let’s get started!</p>
-        <button>Log in with Outlook</button>
-        <p>Or</p>
-        <button>Login with Mobile OTP</button>
-      </div>
+    <div className="flex flex-col gap-4 text-gray-800">
+
+      <h3 className="text-2xl font-bold text-center text-blue-950">
+        Outlook Login
+      </h3>
+
+      <label htmlFor="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="sapID@dit.edu.in"
+        className="border border-gray-300 rounded-lg p-3 w-full required"
+      />
+
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        className="border border-gray-300 rounded-lg p-3 w-full required"
+      />
+
+      <button 
+      onClick={onLoginSuccess}
+      className="bg-blue-950 text-white p-3 rounded-lg hover:bg-blue-800">
+        Login
+      </button>
+
+      <button
+        onClick={onSelectPage}
+        className="bg-gray-200 text-gray-800 p-3 rounded-lg hover:bg-gray-300"
+      >
+        Cancel
+      </button>
+
     </div>
   );
 };
+
+export default OutLook;

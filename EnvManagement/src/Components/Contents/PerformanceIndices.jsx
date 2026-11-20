@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function PerformanceIndices() {
+
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formattedDateTime = currentTime.toLocaleString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
   return (
     <div className="bg-amber-50 p-5 rounded-2xl border-2 border-red-500 font-sans">
       <div className="bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
@@ -14,7 +34,7 @@ function PerformanceIndices() {
 
           <div className="flex items-center gap-3 text-xs">
             <p className="bg-blue-800 px-3 py-1.5 rounded-xl font-mono">
-              🗓️ NOV 06, 2026 at 11:11:11 AM
+              🗓️ {formattedDateTime}
             </p>
             <div className="bg-blue-950 rounded-lg border-1">
             <button className="hover:bg-blue-800 px-3 py-1.5 rounded transition font-bold ">
