@@ -3,7 +3,7 @@ function ADashboard() {
   return (
     <div>
       <h1 className="text-center text-purple-900 mb-10 font-bold font-serif">ALUMNI DASHBOARD</h1>
-      <div className="grid grid-rows-2 bg-blue-100 gap-6 rounded-lg p-6">
+      <div className="grid grid-rows-2 bg-blue-100 gap-6 rounded-lg p-4 pb-0 mx-15">
         {/* up grid */}
         <div className="grid grid-cols-2 gap-6">
           <div className="grid grid-rows-3 ">
@@ -83,17 +83,17 @@ function ADashboard() {
         </div>
 
         {/* down grid */}
-        <div className="grid grid-cols-2 gap-6 h-50">
+        <div className="grid grid-cols-2 gap-6 h-45">
           <div className="bg-white flex flex-col items-center p-10 gap-6 rounded-lg">
             <p className="text-center text-xs">🎓 Degree Graduated On</p>
-            <p className="bg-blue-50 inline-block px-3 py-2">
+            <p className="bg-blue-50 inline-block px-3 py-2 border border-gray-200 rounded-lg">
               Batchelor of Technology in Computer Science and Engineering / Data
               Science and Analytics
             </p>
           </div>
           <div className="bg-white flex flex-col items-center p-3 p-10 gap-6 rounded-lg">
             <p className="text-center text-xs">☀️ Degree Awarded On</p>
-            <p className="bg-blue-50 inline-block px-3 py-2">
+            <p className="bg-blue-50 inline-block px-3 py-2 border border-gray-200 rounded-lg">
               Degree will be awarded during Convocation
             </p>
           </div>

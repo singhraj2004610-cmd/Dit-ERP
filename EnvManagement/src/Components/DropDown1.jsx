@@ -6,42 +6,42 @@ function DropDown1({ onSelectPage }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
   return (
-    <div className="w-56 bg-slate-800 rounded-md shadow-lg p-3">
+    <div className="w-62 bg-slate-800 shadow-lg p-3 border">
 
       {/* Parent Dropdown */}
       <button
         onClick={() => setIsAcademicOpen(!isAcademicOpen)}
-        className="bg-slate-800 text-white px-5 py-2 rounded-md"
+        className="hover:bg-slate-600 text-white px-2 rounded-md"
       >
         Academic
       </button>
 
       {isAcademicOpen && (
-        <div className="mt-2 w-56 bg-slate-800 rounded-md shadow-lg">
+        <div className="mt-2 bg-slate-800 rounded-md shadow-lg">
 
           {/* Child Dropdown */}
-          <div className="p-3">
+          <div className="p-2 rounded-md border border-blue-400 text-sm">
 
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
-              className="text-white px-3 py-2 rounded-md hover:bg-slate-600 text-left"
+              className="text-white px-3 py-2 hover:bg-slate-600 text-left"
             >
               Academic Activities
             </button>
 
             {/* Nested Dropdown */}
             {isActivitiesOpen && (
-              <div className="mt-2 ml-4 bg-slate-700 rounded-md">
+              <div className="bg-slate-700">
 
                  <button
                   onClick={() => onSelectPage("performance")}
-                  className="p-3 text-white hover:bg-blue-600 cursor-pointer w-full text-left"
+                  className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full text-left rounded-md border border-blue-400"
                 >
                   Performance Indices
                 </button>              
 
                  <button
-                  className="p-3 text-white hover:bg-blue-600 cursor-pointer w-full text-left"
+                  className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full text-left rounded-md border border-blue-400"
                   onClick={() => onSelectPage("myCourses")}
                 >
                   My Courses

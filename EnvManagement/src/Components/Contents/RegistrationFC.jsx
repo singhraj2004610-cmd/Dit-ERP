@@ -38,41 +38,45 @@ function RegConvocation() {
       </div>
       <div className="mb-6 border-y-3 shadow-xl border-blue-400 border mx-40  p-4 rounded-sm space-y-6 pb-12 flex flex-col items-center">
         <div className="space-x-10">
-          <label for="fruit-select" className="font-bold">Document Type</label>
+          <label for="fruit-select" className="font-bold">
+            Document Type
+          </label>
 
           <select id="fruit-select" name="fruit" className="border rounded-lg">
-            <option value="">--Select Document-- </option>
-            <option value="apple">Original Degree Certificate</option>
-            <option value="banana">Provisional Degree Certificate</option>
-            <option value="mango" selected>
+            <option value="sd" selected>--Select Document--</option>
+            <option value="odc">Original Degree Certificate</option>
+            <option value="pdc" >Provisional Degree Certificate</option>
+            <option value="tc" >
               Transfer Certificate
             </option>
-            <option value="mango" selected>
+            <option value="mc" >
               Migration Certificate
             </option>
-            <option value="mango" selected>
+            <option value="cc" >
               Character Certificate
             </option>
-            <option value="mango" selected>
+            <option value="bc" >
               Bonafied Certificate
             </option>
-            <option value="mango" selected>
+            <option value="ddc" >
               Duplicate Degree Certificate
             </option>
-            <option value="mango" selected>
+            <option value="pcc" >
               Program Completion Certificate
             </option>
-            <option value="mango" selected>
+            <option value="t" >
               Transcript
             </option>
           </select>
 
-          <label htmlFor="reason" className="font-bold">Reason</label>
+          <label htmlFor="reason" className="font-bold">
+            Reason
+          </label>
           <input type="text" id="reason" className="rounded-lg border" />
         </div>
         <div className="flex space-x-5 ">
-            <button className="border rounded-lg px-4 font-bold">REQUEST</button>
-            <button className="border rounded-lg px-8 font-bold">RESET</button>
+          <button className="border rounded-lg px-4 font-bold">REQUEST</button>
+          <button className="border rounded-lg px-8 font-bold">RESET</button>
         </div>
       </div>
     </div>

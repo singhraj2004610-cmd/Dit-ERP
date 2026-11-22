@@ -6,21 +6,21 @@ function DropDown2({ onSelectPage }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
   return (
-    <div className="w-56 bg-slate-800 rounded-md shadow-lg p-3">
+    <div className="w-62 bg-slate-800 shadow-lg p-3 border">
 
       {/* Parent Dropdown */}
       <button
         onClick={() => setIsAcademicOpen(!isAcademicOpen)}
-        className="bg-slate-800 text-white px-2 py-2 rounded-md"
+        className="hover:bg-slate-600 text-white px-2 rounded-md"
       >
         Academic Documents
       </button>
 
       {isAcademicOpen && (
-        <div className="mt-2 w-56 bg-slate-800 rounded-md shadow-lg">
+        <div className="mt-2 bg-slate-800 rounded-md shadow-lg border border-blue-400">
 
           {/* Child Dropdown */}
-          <div className="p-2">
+          <div className="p-2 text-sm">
 
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
@@ -31,10 +31,10 @@ function DropDown2({ onSelectPage }) {
 
             {/* Nested Dropdown */}
             {isActivitiesOpen && (
-              <div className="mt-2 ml-4 bg-slate-700 rounded-md">
+              <div className="bg-slate-700 rounded-md">
 
                 <button
-                  className="p-3 text-white hover:bg-blue-600 cursor-pointer w-full text-left"
+                  className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full text-left border rounded-md border-blue-400"
                   onClick={() => onSelectPage("gradeSheet")}
                 >
                   Grade Sheet

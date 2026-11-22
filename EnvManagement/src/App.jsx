@@ -12,7 +12,7 @@ function LoginPage() {
   return (
     <div className="min-h-screen w-full bg-[url('./assets/unison-group3.webp')] bg-cover bg-center bg-no-repeat flex items-center justify-center font-sans antialiased relative">
       <div className="flex flex-col md:flex-row min-h-screen w-full overflow-hidden shadow-2xl bg-white/50">
-        {/* LEFT COLUMN: Branding & Celebration Details */}
+        
         <div className="flex flex-col p-8 md:p-12 w-full md:w-3/4 text-white bg-black/60 justify-center items-center rounded-t-2xl md:rounded-t-none md:rounded-tr-3xl md:rounded-br-3xl">
           <div className="flex items-center">
             <img
@@ -39,7 +39,7 @@ function LoginPage() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Interactive Gateway Login Card */}
+       
         <div className="flex flex-col items-center justify-center p-8 md:p-12 w-full md:w-1/2 text-white gap-3">
           <img
             src={logo}

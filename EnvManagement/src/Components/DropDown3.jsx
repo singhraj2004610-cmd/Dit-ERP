@@ -6,21 +6,21 @@ function DropDown3({onSelectPage}) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
   return (
-    <div className="w-56 bg-slate-800 rounded-md shadow-lg p-3">
+    <div className="w-62 bg-slate-800 shadow-lg p-3 border">
 
       {/* Parent Dropdown */}
       <button
         onClick={() => setIsAcademicOpen(!isAcademicOpen)}
-        className="bg-slate-800 text-white px-5 py-2 rounded-md"
+        className="hover:bg-slate-600 text-white px-2 rounded-md"
       >
         Graduation
       </button>
 
       {isAcademicOpen && (
-        <div className="mt-2 w-56 bg-slate-800 rounded-md shadow-lg">
+        <div className="mt-2 bg-slate-800 rounded-md shadow-lg">
 
           {/* Child Dropdown */}
-          <div className="p-3">
+          <div className="p-2 border border-blue-400 text-sm rounded-md">
 
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
@@ -31,15 +31,15 @@ function DropDown3({onSelectPage}) {
 
             {/* Nested Dropdown */}
             {isActivitiesOpen && (
-              <div className="mt-2 ml-4 bg-slate-700 rounded-md">
+              <div className="bg-slate-700">
 
-                <button className="p-3 text-white hover:bg-blue-600 cursor-pointer"
+                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400"
                 onClick={() => onSelectPage("graduationState")}
                 >
                   Graduation Status
                 </button>
 
-                 <button className="p-3 text-white hover:bg-blue-600 cursor-pointer"
+                 <button className="p-1 text-white hover:bg-blue-600 w-full cursor-pointer border rounded-md border-blue-400"
                  onClick={() => onSelectPage("regconvocation")}
                  >
                   Registration for Convocation & Other Documents
