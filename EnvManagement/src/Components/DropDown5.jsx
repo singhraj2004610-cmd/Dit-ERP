@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function DropDown5() {
+function DropDown5({onSelectPage}) {
   const [isAcademicOpen, setIsAcademicOpen] = useState(false);
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
@@ -9,7 +9,7 @@ function DropDown5() {
       {/* Process Dropdown */}
       <button
         onClick={() => setIsAcademicOpen(!isAcademicOpen)}
-        className="text-white px-3 rounded-md hover:bg-slate-600 text-left"
+        className="text-white px-2 w-full rounded-md hover:bg-slate-600 text-left"
       >
         Placement
       </button>
@@ -20,37 +20,49 @@ function DropDown5() {
           <div className="p-2 rounded-md border border-blue-400 text-sm">
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
-              className="text-white px-3 py-2 rounded-md hover:bg-slate-600 text-left"
+              className="text-white px-3 py-2 rounded-md hover:bg-slate-600 text-left w-full"
             >
               Process
             </button>
 
             {/* Nested Dropdown */}
             {isActivitiesOpen && (
-              <div className="bg-slate-700 rounded-md">
-                <div className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400">
+              <div className="bg-slate-700 ">
+                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
+                onClick={() => onSelectPage("career")}
+                >
                   Career Choice
-                </div>
+                </button>
 
-                <div className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400">
+                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
+                onClick={() => onSelectPage("placement")}
+                >
                   Placement Registration
-                </div>
+                </button>
 
-                <div className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400">
+                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
+                onClick={() => onSelectPage("profile")}
+                >
                   Profile Update
-                </div>
+                </button>
 
-                <div className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400">
+                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
+                onClick={() => onSelectPage("all")}
+                >
                   All Job Opning
-                </div>
+                </button>
 
-                <div className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400">
+                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
+                onClick={() => onSelectPage("apply")}
+                >
                   Apply for Drive
-                </div>
+                </button>
 
-                <div className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400">
+                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
+                onClick={() => onSelectPage("offer")}
+                >
                   Offer Report
-                </div>
+                </button>
               </div>
             )}
           </div>

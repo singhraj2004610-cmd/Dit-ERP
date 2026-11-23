@@ -16,6 +16,12 @@ import Flefger from "./Components/Contents/fees/FLedger.jsx";
 import Fstructure from "./Components/Contents/fees/FStructure.jsx";
 import Receipts from "./Components/Contents/fees/receipts.jsx";
 import Invoice from "./Components/Contents/fees/invoice.jsx";
+import CareerChoice from "./Components/Contents/placement/careerChoice.jsx";
+import PlacementReg from "./Components/Contents/placement/placementReg.jsx";
+import ProfileUpd from "./Components/Contents/placement/profileUpd.jsx";
+import AllJobs from "./Components/Contents/placement/allJobs.jsx";
+import ApplyDrive from "./Components/Contents/placement/applyDrive.jsx";
+import OfferRep from "./Components/Contents/placement/offerRep.jsx";
 
 function TopHeader({ onLogout }) {
   const [activePage, setActivePage] = useState("dashboard");
@@ -34,6 +40,12 @@ function TopHeader({ onLogout }) {
     fstructure: "Fee Structure",
     receipt: "Receipts",
     invoic: "Invoice",
+    career: "Career Choice",
+    placement: "Placement Registration",
+    profile: "Profile Update",
+    all: "All Job Opening",
+    apply: "Apply for Drive",
+    offer: "Offer Report",
   };
 
   const handleSelectPage = (page) => {
@@ -125,16 +137,19 @@ function TopHeader({ onLogout }) {
               <input
                 type="text"
                 placeholder="Search menu here..."
-                className="h-8 bg-white text-white placeholder:text-gray-400 placeholder:text-xs placeholder:p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="h-8 bg-white w-full text-white placeholder:text-gray-400 placeholder:text-xs placeholder:p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
               <DropDown1 onSelectPage={handleSelectPage} />
+
               <DropDown2 onSelectPage={handleSelectPage} />
+
               <DropDown3 onSelectPage={handleSelectPage} />
+
               <DropDown4 onSelectPage={handleSelectPage} />
 
-              <DropDown5 />
+              <DropDown5 onSelectPage={handleSelectPage} />
             </div>
           </nav>
         </aside>
@@ -172,7 +187,7 @@ function TopHeader({ onLogout }) {
           </div>
 
           {/* Main Page Content */}
-          <div className="bg-white p-6 min-h-full">
+         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-white p-6">
             {activePage === "dashboard" && <ADashboard />}
 
             {activePage === "performance" && <PerformanceIndices />}
@@ -194,6 +209,18 @@ function TopHeader({ onLogout }) {
             {activePage === "receipt" && <Receipts />}
 
             {activePage === "invoic" && <Invoice />}
+
+            {activePage === "career" && <CareerChoice />}
+
+            {activePage === "placement" && <PlacementReg />}
+
+            {activePage === "profile" && <ProfileUpd />}
+
+            {activePage === "all" && <AllJobs />}
+
+            {activePage === "apply" && <ApplyDrive />}
+            
+            {activePage === "offer" && <OfferRep />}
           </div>
         </main>
       </div>

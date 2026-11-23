@@ -6,12 +6,12 @@ function DropDown2({ onSelectPage }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
   return (
-    <div className="w-62 bg-slate-800 shadow-lg p-3 border">
+    <div className="w-62 bg-slate-800 shadow-lg p-2 border">
 
       {/* Parent Dropdown */}
       <button
         onClick={() => setIsAcademicOpen(!isAcademicOpen)}
-        className="hover:bg-slate-600 text-white px-2 rounded-md"
+        className="hover:bg-slate-600 text-white px-2 rounded-md w-full text-left"
       >
         Academic Documents
       </button>
@@ -24,7 +24,7 @@ function DropDown2({ onSelectPage }) {
 
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
-              className="text-white px-2 py-2 rounded-md hover:bg-slate-600 text-left"
+              className="text-white px-2 py-2 rounded-md hover:bg-slate-600 text-left w-full"
             >
               Generate Grade Sheet
             </button>

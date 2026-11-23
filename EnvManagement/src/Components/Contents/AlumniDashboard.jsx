@@ -2,7 +2,7 @@ import photo from "/Users/rajababu/Documents/internship tasks/Enventory manageme
 function ADashboard() {
   return (
     <div>
-      <h1 className="text-center text-purple-900 mb-10 font-bold font-serif">ALUMNI DASHBOARD</h1>
+      <h1 className="text-center text-purple-900 mb-10 font-bold font-serif text-xl">ALUMNI DASHBOARD</h1>
       <div className="grid grid-rows-2 bg-blue-100 gap-6 rounded-lg p-4 pb-0 mx-15">
         {/* up grid */}
         <div className="grid grid-cols-2 gap-6">
