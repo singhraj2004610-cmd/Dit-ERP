@@ -1,22 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function DropDown5({onSelectPage}) {
-  const [isAcademicOpen, setIsAcademicOpen] = useState(false);
+function DropDown5({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
+
+  const items = [
+    { label: "Career Choice", page: "career" },
+    { label: "Placement Registration", page: "placement" },
+    { label: "Profile Update", page: "profile" },
+    { label: "All Job Opening", page: "all" },
+    { label: "Apply for Drive", page: "apply" },
+    { label: "Offer Report", page: "offer" },
+  ];
+
+  useEffect(() => {
+    if (!isOpen) {
+      setIsActivitiesOpen(false);
+    }
+  }, [isOpen]);
+
+  const query = searchQuery.trim().toLowerCase();
+  const isSearching = query.length > 0;
+
+  const filteredItems = isSearching
+    ? items.filter(
+        (item) =>
+          item.label.toLowerCase().includes(query) ||
+          "placement".includes(query) ||
+          "process".includes(query)
+      )
+    : items;
+
+  if (isSearching && filteredItems.length === 0) return null;
+
+  const showParent = isSearching ? true : isOpen;
+  const showChild = isSearching ? true : isActivitiesOpen;
 
   return (
     <div className="w-62 bg-slate-800 shadow-lg p-2 border">
-      {/* Process Dropdown */}
       <button
-        onClick={() => setIsAcademicOpen(!isAcademicOpen)}
+        onClick={onToggle}
         className="text-white px-2 w-full rounded-md hover:bg-slate-600 text-left"
       >
         Placement
       </button>
 
-      {isAcademicOpen && (
+      {showParent && (
         <div className="mt-2 bg-slate-800 rounded-md shadow-lg">
-          {/* Child Dropdown */}
           <div className="p-2 rounded-md border border-blue-400 text-sm">
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
@@ -25,44 +54,17 @@ function DropDown5({onSelectPage}) {
               Process
             </button>
 
-            {/* Nested Dropdown */}
-            {isActivitiesOpen && (
-              <div className="bg-slate-700 ">
-                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
-                onClick={() => onSelectPage("career")}
-                >
-                  Career Choice
-                </button>
-
-                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
-                onClick={() => onSelectPage("placement")}
-                >
-                  Placement Registration
-                </button>
-
-                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
-                onClick={() => onSelectPage("profile")}
-                >
-                  Profile Update
-                </button>
-
-                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
-                onClick={() => onSelectPage("all")}
-                >
-                  All Job Opning
-                </button>
-
-                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
-                onClick={() => onSelectPage("apply")}
-                >
-                  Apply for Drive
-                </button>
-
-                <button className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
-                onClick={() => onSelectPage("offer")}
-                >
-                  Offer Report
-                </button>
+            {showChild && (
+              <div className="bg-slate-700">
+                {filteredItems.map((item) => (
+                  <button
+                    key={item.page}
+                    className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
+                    onClick={() => onSelectPage(item.page)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </div>
             )}
           </div>

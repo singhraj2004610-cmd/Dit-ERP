@@ -28,8 +28,11 @@ function TopHeader({ onLogout }) {
 
   const [openedPages, setOpenedPages] = useState(["dashboard"]);
 
+  // Tracks which dropdown is currently open (1 to 5, or null if all closed)
+  const [openDropdown, setOpenDropdown] = useState(null);
+
   const pageLabels = {
-    dashboard: "Dashboard",
+    dashboard: "Alumni Dashboard",
     performance: "Performance Indices",
     myCourses: "My Courses",
     gradeSheet: "Grade Sheet",
@@ -70,9 +73,26 @@ function TopHeader({ onLogout }) {
     }
   };
 
+  const [zoomLevel, setZoomLevel] = useState(1);
+
+  const handleZoomIn = () => {
+    setZoomLevel((prev) => Math.min(Number((prev + 0.1).toFixed(1)), 1.5)); // Max 150%
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((prev) => Math.max(Number((prev - 0.1).toFixed(1)), 0.7)); // Min 70%
+  };
+  const handleToggleDropdown = (id) => {
+    setOpenDropdown((prev) => (prev === id ? null : id));
+  };
+  const [searchQuery, setSearchQuery] = useState("");
+
   const handleReset = () => {
     setActivePage("dashboard");
     setOpenedPages(["dashboard"]);
+    setZoomLevel(1);
+    setOpenDropdown(null);
+    setSearchQuery("");
   };
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
@@ -101,10 +121,16 @@ function TopHeader({ onLogout }) {
           RAJABABU PATEL (1000019238){" "}
         </h1>
         <div className="flex gap-2 items-center self-center">
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold  px-4 rounded h-8 text-center">
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white font-bold  px-4 rounded h-8 text-center"
+            onClick={handleZoomOut}
+          >
             -
           </button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold px-4 rounded h-8 text-center">
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold px-4 rounded h-8 text-center"
+            onClick={handleZoomIn}
+          >
             +
           </button>
           <button
@@ -136,20 +162,43 @@ function TopHeader({ onLogout }) {
               <i className="1xl">🔍</i>
               <input
                 type="text"
+                 value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search menu here..."
-                className="h-8 bg-white w-full text-white placeholder:text-gray-400 placeholder:text-xs placeholder:p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="h-8 bg-white w-full text-black p-2 placeholder:text-gray-400 placeholder:text-xs placeholder:p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div>
-              <DropDown1 onSelectPage={handleSelectPage} />
-
-              <DropDown2 onSelectPage={handleSelectPage} />
-
-              <DropDown3 onSelectPage={handleSelectPage} />
-
-              <DropDown4 onSelectPage={handleSelectPage} />
-
-              <DropDown5 onSelectPage={handleSelectPage} />
+          <div>
+              <DropDown1
+                onSelectPage={handleSelectPage}
+                isOpen={openDropdown === 1}
+                onToggle={() => handleToggleDropdown(1)}
+                searchQuery={searchQuery}
+              />
+              <DropDown2
+                onSelectPage={handleSelectPage}
+                isOpen={openDropdown === 2}
+                onToggle={() => handleToggleDropdown(2)}
+                searchQuery={searchQuery}
+              />
+              <DropDown3
+                onSelectPage={handleSelectPage}
+                isOpen={openDropdown === 3}
+                onToggle={() => handleToggleDropdown(3)}
+                searchQuery={searchQuery}
+              />
+              <DropDown4
+                onSelectPage={handleSelectPage}
+                isOpen={openDropdown === 4}
+                onToggle={() => handleToggleDropdown(4)}
+                searchQuery={searchQuery}
+              />
+              <DropDown5
+                onSelectPage={handleSelectPage}
+                isOpen={openDropdown === 5}
+                onToggle={() => handleToggleDropdown(5)}
+                searchQuery={searchQuery}
+              />
             </div>
           </nav>
         </aside>
@@ -164,7 +213,7 @@ function TopHeader({ onLogout }) {
                 className={`flex items-center gap-3 px-4 py-2 rounded-t-lg cursor-pointer whitespace-nowrap text-sm font-semibold
           ${
             activePage === page
-              ? "bg-white text-blue-800 border-t-2 border-blue-600"
+              ? "bg-white text-black-800 border-t-2 border-blue-600"
               : "bg-slate-300 text-slate-700 hover:bg-slate-100"
           }`}
               >
@@ -187,40 +236,42 @@ function TopHeader({ onLogout }) {
           </div>
 
           {/* Main Page Content */}
-         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-white p-6">
-            {activePage === "dashboard" && <ADashboard />}
+          <div className="flex-1 min-h-0 overflow-y-auto overflow-x-auto bg-white p-6">
+            <div style={{ zoom: zoomLevel }}>
+              {activePage === "dashboard" && <ADashboard />}
 
-            {activePage === "performance" && <PerformanceIndices />}
+              {activePage === "performance" && <PerformanceIndices />}
 
-            {activePage === "myCourses" && <MyCourses />}
+              {activePage === "myCourses" && <MyCourses />}
 
-            {activePage === "gradeSheet" && <GradeSheet />}
+              {activePage === "gradeSheet" && <GradeSheet />}
 
-            {activePage === "graduationState" && <GStatus />}
+              {activePage === "graduationState" && <GStatus />}
 
-            {activePage === "regconvocation" && <RegConvocation />}
+              {activePage === "regconvocation" && <RegConvocation />}
 
-            {activePage === "opayments" && <Opayments />}
+              {activePage === "opayments" && <Opayments />}
 
-            {activePage === "fledger" && <Flefger />}
+              {activePage === "fledger" && <Flefger />}
 
-            {activePage === "fstructure" && <Fstructure />}
+              {activePage === "fstructure" && <Fstructure />}
 
-            {activePage === "receipt" && <Receipts />}
+              {activePage === "receipt" && <Receipts />}
 
-            {activePage === "invoic" && <Invoice />}
+              {activePage === "invoic" && <Invoice />}
 
-            {activePage === "career" && <CareerChoice />}
+              {activePage === "career" && <CareerChoice />}
 
-            {activePage === "placement" && <PlacementReg />}
+              {activePage === "placement" && <PlacementReg />}
 
-            {activePage === "profile" && <ProfileUpd />}
+              {activePage === "profile" && <ProfileUpd />}
 
-            {activePage === "all" && <AllJobs />}
+              {activePage === "all" && <AllJobs />}
 
-            {activePage === "apply" && <ApplyDrive />}
-            
-            {activePage === "offer" && <OfferRep />}
+              {activePage === "apply" && <ApplyDrive />}
+
+              {activePage === "offer" && <OfferRep />}
+            </div>
           </div>
         </main>
       </div>

@@ -3,11 +3,11 @@ function ADashboard() {
   return (
     <div>
       <h1 className="text-center text-purple-900 mb-10 font-bold font-serif text-xl">ALUMNI DASHBOARD</h1>
-      <div className="grid grid-rows-2 bg-blue-100 gap-6 rounded-lg p-4 pb-0 mx-15">
+      <div className="grid grid-rows-2 bg-blue-100 gap-6 rounded-xl p-4 pb-0 mx-15">
         {/* up grid */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-8 mx-6">
           <div className="grid grid-rows-3 ">
-            <div className="grid grid-cols-2 gap-2 h-17">
+            <div className="grid grid-cols-2 gap-6 h-17">
               <div className="grid grid-cols-2">
                 <p className="bg-red-800 text-white p-2 text-xs">
                   Current{" "}
@@ -15,7 +15,7 @@ function ADashboard() {
                     <span className="text-base">Outstanding </span>Balance
                   </p>
                 </p>
-                <p className="bg-white p-6">₹ 0</p>
+                <p className="bg-white p-4 text-center"><span className="text-green-600 text-3xl">₹</span> 0</p>
               </div>
               <div className="grid grid-cols-2">
                 <p className="bg-red-800 text-white p-2 text-xs">
@@ -24,11 +24,11 @@ function ADashboard() {
                     <span className="text-base">Credits </span>Earned
                   </p>
                 </p>
-                <p className="bg-white p-6">⭐️163</p>
+                <p className="bg-white p-4 text-center"><span className="text-3xl">⭐️</span>163</p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 h-17">
+            <div className="grid grid-cols-2 gap-6 h-17">
               <div className="grid grid-cols-2">
                 <p className="bg-red-800 text-white p-2 text-xs">
                   Total{" "}
@@ -36,13 +36,13 @@ function ADashboard() {
                     <span className="text-base">Credits </span>Pending
                   </p>
                 </p>
-                <p className="bg-white p-6">⭐️0</p>
+                <p className="bg-white p-4 text-center"><span className="text-3xl">⭐️</span>0</p>
               </div>
               <div className="grid grid-cols-2">
                 <p className="bg-red-800 text-white p-2 text-xs">
                   Current <p className="text-base">CGPA</p>
                 </p>
-                <p className="bg-white p-6">🎯7.43</p>
+                <p className="bg-white p-4 text-center"><span className="text-3xl">🎯</span>7.43</p>
               </div>
             </div>
             <div className="bg-white p-3 rounded-lg">
@@ -83,16 +83,16 @@ function ADashboard() {
         </div>
 
         {/* down grid */}
-        <div className="grid grid-cols-2 gap-6 h-45">
+        <div className="grid grid-cols-2 gap-6 h-40">
           <div className="bg-white flex flex-col items-center p-10 gap-6 rounded-lg">
-            <p className="text-center text-xs">🎓 Degree Graduated On</p>
+            <p className="text-center text-xs text-blue-900"><span className="text-3xl">🎓</span> Degree Graduated On</p>
             <p className="bg-blue-50 inline-block px-3 py-2 border border-gray-200 rounded-lg">
               Batchelor of Technology in Computer Science and Engineering / Data
               Science and Analytics
             </p>
           </div>
-          <div className="bg-white flex flex-col items-center p-3 p-10 gap-6 rounded-lg">
-            <p className="text-center text-xs">☀️ Degree Awarded On</p>
+          <div className="bg-white flex flex-col items-center p-10 gap-6 rounded-lg">
+            <p className="text-center text-xs text-blue-900"><span className="text-3xl text-red-800">☀️</span>  Degree Awarded On</p>
             <p className="bg-blue-50 inline-block px-3 py-2 border border-gray-200 rounded-lg">
               Degree will be awarded during Convocation
             </p>
