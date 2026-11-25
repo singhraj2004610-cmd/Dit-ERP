@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "rucSfMhVIrg=",
+  "success": true,
+  "projectFilePath": "/Users/rajababu/Documents/internship tasks/DIT University ERP/backend/backendApi/backendApi.csproj",
+  "expectedPackageFiles": [
+    "/Users/rajababu/.nuget/packages/microsoft.aspnetcore.openapi/10.0.15/microsoft.aspnetcore.openapi.10.0.15.nupkg.sha512",
+    "/Users/rajababu/.nuget/packages/microsoft.openapi/2.13.0/microsoft.openapi.2.13.0.nupkg.sha512",
+    "/Users/rajababu/.nuget/packages/scalar.aspnetcore/2.21.0/scalar.aspnetcore.2.21.0.nupkg.sha512"
+  ],
+  "logs": []
+}
