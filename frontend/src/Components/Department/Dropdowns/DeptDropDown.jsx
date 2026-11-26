@@ -1,56 +1,55 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function DropDown1({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
-  const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
-
-  const items = [
-    { label: "Performance Indices", page: "performance" },
-    { label: "My Courses", page: "myCourses" },
-  ];
-
-  useEffect(() => {
-    if (!isOpen) {
-      setIsActivitiesOpen(false);
-    }
-  }, [isOpen]);
+// Same look & behaviour as the Student DropDown1..5, but driven by props
+// so one component serves every department menu.
+function DeptDropDown({
+  title,        // top-level button text, e.g. "Attendance"
+  subtitle,     // inner button text, e.g. "Attendance Management"
+  items,        // [{ label, page }]
+  onSelectPage,
+  isOpen,
+  onToggle,
+  searchQuery = "",
+}) {
+  const [isInnerOpen, setIsInnerOpen] = useState(false);
 
   const query = searchQuery.trim().toLowerCase();
   const isSearching = query.length > 0;
 
-  // Filter items that match the search text (or if user typed "academic")
   const filteredItems = isSearching
     ? items.filter(
         (item) =>
           item.label.toLowerCase().includes(query) ||
-          "academic".includes(query) ||
-          "academic activities".includes(query)
+          title.toLowerCase().includes(query) ||
+          subtitle.toLowerCase().includes(query)
       )
     : items;
 
-  // Hide this entire dropdown if user is searching and nothing matches
   if (isSearching && filteredItems.length === 0) return null;
 
-  // Auto-expand both parent and child menus when searching
   const showParent = isSearching ? true : isOpen;
-  const showChild = isSearching ? true : isActivitiesOpen;
+  const showChild = isSearching ? true : isInnerOpen;
 
   return (
     <div className="w-62 bg-slate-800 shadow-lg p-2 border">
       <button
-        onClick={onToggle}
+        onClick={() => {
+          setIsInnerOpen(false);
+          onToggle();
+        }}
         className="hover:bg-slate-600 text-white px-2 rounded-md transition w-full text-left"
       >
-        Academic
+        {title}
       </button>
 
       {showParent && (
         <div className="mt-2 bg-slate-800 rounded-md shadow-lg">
           <div className="p-2 rounded-md border border-blue-400 text-sm">
             <button
-              onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
+              onClick={() => setIsInnerOpen(!isInnerOpen)}
               className="text-white px-3 py-2 hover:bg-slate-600 text-left w-full"
             >
-              Academic Activities
+              {subtitle}
             </button>
 
             {showChild && (
@@ -73,4 +72,4 @@ function DropDown1({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   );
 }
 
-export default DropDown1;
+export default DeptDropDown;

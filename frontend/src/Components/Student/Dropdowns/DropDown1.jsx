@@ -1,47 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function DropDown5({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
+function DropDown1({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
   const items = [
-    { label: "Career Choice", page: "career" },
-    { label: "Placement Registration", page: "placement" },
-    { label: "Profile Update", page: "profile" },
-    { label: "All Job Opening", page: "all" },
-    { label: "Apply for Drive", page: "apply" },
-    { label: "Offer Report", page: "offer" },
+    { label: "Performance Indices", page: "performance" },
+    { label: "My Courses", page: "myCourses" },
   ];
-
-  useEffect(() => {
-    if (!isOpen) {
-      setIsActivitiesOpen(false);
-    }
-  }, [isOpen]);
 
   const query = searchQuery.trim().toLowerCase();
   const isSearching = query.length > 0;
 
+  // Filter items that match the search text (or if user typed "academic")
   const filteredItems = isSearching
     ? items.filter(
         (item) =>
           item.label.toLowerCase().includes(query) ||
-          "placement".includes(query) ||
-          "process".includes(query)
+          "academic".includes(query) ||
+          "academic activities".includes(query)
       )
     : items;
 
+  // Hide this entire dropdown if user is searching and nothing matches
   if (isSearching && filteredItems.length === 0) return null;
 
+  // Auto-expand both parent and child menus when searching
   const showParent = isSearching ? true : isOpen;
   const showChild = isSearching ? true : isActivitiesOpen;
 
   return (
     <div className="w-62 bg-slate-800 shadow-lg p-2 border">
       <button
-        onClick={onToggle}
-        className="text-white px-2 w-full rounded-md hover:bg-slate-600 text-left"
+        onClick={() => {
+          setIsActivitiesOpen(false);
+          onToggle();
+        }}
+        className="hover:bg-slate-600 text-white px-2 rounded-md transition w-full text-left"
       >
-        Placement
+        Academic
       </button>
 
       {showParent && (
@@ -49,9 +45,9 @@ function DropDown5({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
           <div className="p-2 rounded-md border border-blue-400 text-sm">
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
-              className="text-white px-3 py-2 rounded-md hover:bg-slate-600 text-left w-full"
+              className="text-white px-3 py-2 hover:bg-slate-600 text-left w-full"
             >
-              Process
+              Academic Activities
             </button>
 
             {showChild && (
@@ -59,8 +55,8 @@ function DropDown5({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
                 {filteredItems.map((item) => (
                   <button
                     key={item.page}
-                    className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
                     onClick={() => onSelectPage(item.page)}
+                    className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full text-left rounded-md border border-blue-400"
                   >
                     {item.label}
                   </button>
@@ -74,4 +70,4 @@ function DropDown5({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   );
 }
 
-export default DropDown5;
+export default DropDown1;

@@ -1,21 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function DropDown4({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
+function DropDown5({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
   const items = [
-    { label: "Online Payments", page: "opayments" },
-    { label: "Fee Ledger", page: "fledger" },
-    { label: "Fee Structure", page: "fstructure" },
-    { label: "Receipt", page: "receipt" },
-    { label: "Invoice", page: "invoic" },
+    { label: "Career Choice", page: "career" },
+    { label: "Placement Registration", page: "placement" },
+    { label: "Profile Update", page: "profile" },
+    { label: "All Job Opening", page: "all" },
+    { label: "Apply for Drive", page: "apply" },
+    { label: "Offer Report", page: "offer" },
   ];
-
-  useEffect(() => {
-    if (!isOpen) {
-      setIsActivitiesOpen(false);
-    }
-  }, [isOpen]);
 
   const query = searchQuery.trim().toLowerCase();
   const isSearching = query.length > 0;
@@ -24,8 +19,8 @@ function DropDown4({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
     ? items.filter(
         (item) =>
           item.label.toLowerCase().includes(query) ||
-          "fees".includes(query) ||
-          "my fees".includes(query)
+          "placement".includes(query) ||
+          "process".includes(query)
       )
     : items;
 
@@ -37,10 +32,13 @@ function DropDown4({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   return (
     <div className="w-62 bg-slate-800 shadow-lg p-2 border">
       <button
-        onClick={onToggle}
-        className="hover:bg-slate-600 text-white px-2 rounded-md w-full text-left"
+        onClick={() => {
+          setIsActivitiesOpen(false);
+          onToggle();
+        }}
+        className="text-white px-2 w-full rounded-md hover:bg-slate-600 text-left"
       >
-        Fees
+        Placement
       </button>
 
       {showParent && (
@@ -50,19 +48,19 @@ function DropDown4({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
               className="text-white px-3 py-2 rounded-md hover:bg-slate-600 text-left w-full"
             >
-              My Fees
+              Process
             </button>
 
             {showChild && (
-              <div className="bg-slate-700 rounded-md">
+              <div className="bg-slate-700">
                 {filteredItems.map((item) => (
-                  <div
+                  <button
                     key={item.page}
-                    className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400"
+                    className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400 text-left"
                     onClick={() => onSelectPage(item.page)}
                   >
                     {item.label}
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -73,5 +71,4 @@ function DropDown4({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   );
 }
 
-export default DropDown4;
-
+export default DropDown5;

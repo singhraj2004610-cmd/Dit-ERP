@@ -1,55 +1,20 @@
 import { useState } from "react";
-import logo from "./assets/Ditlogo.png";
-import DropDown1 from "./Components/DropDown1.jsx";
-import DropDown2 from "./Components/DropDown2.jsx";
-import DropDown3 from "./Components/DropDown3.jsx";
-import DropDown4 from "./Components/DropDown4.jsx";
-import DropDown5 from "./Components/DropDown5.jsx";
-import ADashboard from "./Components/Contents/AlumniDashboard.jsx";
-import PerformanceIndices from "./Components/Contents/PerformanceIndices.jsx";
-import MyCourses from "./Components/Contents/MyCourses.jsx";
-import GradeSheet from "./Components/Contents/Gradesheet.jsx";
-import GStatus from "./Components/Contents/GraduationStatus.jsx";
-import RegConvocation from "./Components/Contents/RegistrationFC.jsx";
-import Opayments from "./Components/Contents/fees/OPayments.jsx";
-import Flefger from "./Components/Contents/fees/FLedger.jsx";
-import Fstructure from "./Components/Contents/fees/FStructure.jsx";
-import Receipts from "./Components/Contents/fees/receipts.jsx";
-import Invoice from "./Components/Contents/fees/invoice.jsx";
-import CareerChoice from "./Components/Contents/placement/careerChoice.jsx";
-import PlacementReg from "./Components/Contents/placement/placementReg.jsx";
-import ProfileUpd from "./Components/Contents/placement/profileUpd.jsx";
-import AllJobs from "./Components/Contents/placement/allJobs.jsx";
-import ApplyDrive from "./Components/Contents/placement/applyDrive.jsx";
-import OfferRep from "./Components/Contents/placement/offerRep.jsx";
+import logo from "../../assets/Ditlogo.png";
 
-function TopHeader({ onLogout }) {
+// Shared shell used by every role (student, department, ...).
+// Props:
+//   user          -> { name, email, id } shown in the top bar
+//   onLogout      -> called by the Logout button
+//   pageLabels    -> { pageKey: "Tab title" } (must include `dashboard`)
+//   renderSidebar -> ({ onSelectPage, openDropdown, onToggle, searchQuery }) => JSX
+//   renderPage    -> (activePage, onSelectPage) => JSX
+function TopHeader({ user, onLogout, pageLabels, renderSidebar, renderPage }) {
   const [activePage, setActivePage] = useState("dashboard");
 
   const [openedPages, setOpenedPages] = useState(["dashboard"]);
 
   // Tracks which dropdown is currently open (1 to 5, or null if all closed)
   const [openDropdown, setOpenDropdown] = useState(null);
-
-  const pageLabels = {
-    dashboard: "Alumni Dashboard",
-    performance: "Performance Indices",
-    myCourses: "My Courses",
-    gradeSheet: "Grade Sheet",
-    graduationState: "Graduation Status",
-    regconvocation: "Registration for Convocation",
-    opayments: "Fee Payment",
-    fledger: "Fee Ledger",
-    fstructure: "Fee Structure",
-    receipt: "Receipts",
-    invoic: "Invoice",
-    career: "Career Choice",
-    placement: "Placement Registration",
-    profile: "Profile Update",
-    all: "All Job Opening",
-    apply: "Apply for Drive",
-    offer: "Offer Report",
-  };
 
   const handleSelectPage = (page) => {
     setActivePage(page);
@@ -115,10 +80,9 @@ function TopHeader({ onLogout }) {
             <span className="italic font-serif lowercase">i</span>Nxt
           </p>
         </div>
-        <h1 className="text-1xl font-extrabold text-white">
-          Welcome{" "}
-          <span className="text-yellow-500">1000019238@Dit.Edu.In </span>{" "}
-          RAJABABU PATEL (1000019238){" "}
+        <h1 className="text-xl font-extrabold text-white">
+          Welcome <span className="text-yellow-500">{user.email} </span>{" "}
+          {user.name} ({user.id}){" "}
         </h1>
         <div className="flex gap-2 items-center self-center">
           <button
@@ -134,7 +98,7 @@ function TopHeader({ onLogout }) {
             +
           </button>
           <button
-            className="bg-blue-500 hover:bg-red-700 text-white font-bold px-4 rounded h-8 text-center"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded h-8 text-center"
             onClick={handleReset}
           >
             Reset
@@ -162,43 +126,19 @@ function TopHeader({ onLogout }) {
               <i className="1xl">🔍</i>
               <input
                 type="text"
-                 value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search menu here..."
                 className="h-8 bg-white w-full text-black p-2 placeholder:text-gray-400 placeholder:text-xs placeholder:p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-          <div>
-              <DropDown1
-                onSelectPage={handleSelectPage}
-                isOpen={openDropdown === 1}
-                onToggle={() => handleToggleDropdown(1)}
-                searchQuery={searchQuery}
-              />
-              <DropDown2
-                onSelectPage={handleSelectPage}
-                isOpen={openDropdown === 2}
-                onToggle={() => handleToggleDropdown(2)}
-                searchQuery={searchQuery}
-              />
-              <DropDown3
-                onSelectPage={handleSelectPage}
-                isOpen={openDropdown === 3}
-                onToggle={() => handleToggleDropdown(3)}
-                searchQuery={searchQuery}
-              />
-              <DropDown4
-                onSelectPage={handleSelectPage}
-                isOpen={openDropdown === 4}
-                onToggle={() => handleToggleDropdown(4)}
-                searchQuery={searchQuery}
-              />
-              <DropDown5
-                onSelectPage={handleSelectPage}
-                isOpen={openDropdown === 5}
-                onToggle={() => handleToggleDropdown(5)}
-                searchQuery={searchQuery}
-              />
+            <div>
+              {renderSidebar({
+                onSelectPage: handleSelectPage,
+                openDropdown,
+                onToggle: handleToggleDropdown,
+                searchQuery,
+              })}
             </div>
           </nav>
         </aside>
@@ -238,39 +178,7 @@ function TopHeader({ onLogout }) {
           {/* Main Page Content */}
           <div className="flex-1 min-h-0 overflow-y-auto overflow-x-auto p-6 ">
             <div style={{ zoom: zoomLevel }}>
-              {activePage === "dashboard" && <ADashboard />}
-
-              {activePage === "performance" && <PerformanceIndices />}
-
-              {activePage === "myCourses" && <MyCourses />}
-
-              {activePage === "gradeSheet" && <GradeSheet />}
-
-              {activePage === "graduationState" && <GStatus />}
-
-              {activePage === "regconvocation" && <RegConvocation />}
-
-              {activePage === "opayments" && <Opayments />}
-
-              {activePage === "fledger" && <Flefger />}
-
-              {activePage === "fstructure" && <Fstructure />}
-
-              {activePage === "receipt" && <Receipts />}
-
-              {activePage === "invoic" && <Invoice />}
-
-              {activePage === "career" && <CareerChoice />}
-
-              {activePage === "placement" && <PlacementReg />}
-
-              {activePage === "profile" && <ProfileUpd />}
-
-              {activePage === "all" && <AllJobs />}
-
-              {activePage === "apply" && <ApplyDrive />}
-
-              {activePage === "offer" && <OfferRep />}
+              {renderPage(activePage, handleSelectPage)}
             </div>
           </div>
         </main>

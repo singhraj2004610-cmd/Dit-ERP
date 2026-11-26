@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function DropDown2({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
+function DropDown4({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
 
   const items = [
-    { label: "Grade Sheet", page: "gradeSheet" },
+    { label: "Online Payments", page: "opayments" },
+    { label: "Fee Ledger", page: "fledger" },
+    { label: "Fee Structure", page: "fstructure" },
+    { label: "Receipt", page: "receipt" },
+    { label: "Invoice", page: "invoic" },
   ];
-
-  useEffect(() => {
-    if (!isOpen) {
-      setIsActivitiesOpen(false);
-    }
-  }, [isOpen]);
 
   const query = searchQuery.trim().toLowerCase();
   const isSearching = query.length > 0;
@@ -20,8 +18,8 @@ function DropDown2({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
     ? items.filter(
         (item) =>
           item.label.toLowerCase().includes(query) ||
-          "academic documents".includes(query) ||
-          "generate grade sheet".includes(query)
+          "fees".includes(query) ||
+          "my fees".includes(query)
       )
     : items;
 
@@ -33,32 +31,35 @@ function DropDown2({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   return (
     <div className="w-62 bg-slate-800 shadow-lg p-2 border">
       <button
-        onClick={onToggle}
+        onClick={() => {
+          setIsActivitiesOpen(false);
+          onToggle();
+        }}
         className="hover:bg-slate-600 text-white px-2 rounded-md w-full text-left"
       >
-        Academic Documents
+        Fees
       </button>
 
       {showParent && (
-        <div className="mt-2 bg-slate-800 rounded-md shadow-lg border border-blue-400">
-          <div className="p-2 text-sm">
+        <div className="mt-2 bg-slate-800 rounded-md shadow-lg">
+          <div className="p-2 rounded-md border border-blue-400 text-sm">
             <button
               onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
-              className="text-white px-2 py-2 rounded-md hover:bg-slate-600 text-left w-full"
+              className="text-white px-3 py-2 rounded-md hover:bg-slate-600 text-left w-full"
             >
-              Generate Grade Sheet
+              My Fees
             </button>
 
             {showChild && (
               <div className="bg-slate-700 rounded-md">
                 {filteredItems.map((item) => (
-                  <button
+                  <div
                     key={item.page}
-                    className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full text-left border rounded-md border-blue-400"
+                    className="p-1 text-white hover:bg-blue-600 cursor-pointer w-full border rounded-md border-blue-400"
                     onClick={() => onSelectPage(item.page)}
                   >
                     {item.label}
-                  </button>
+                  </div>
                 ))}
               </div>
             )}
@@ -69,4 +70,5 @@ function DropDown2({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
   );
 }
 
-export default DropDown2;
+export default DropDown4;
+

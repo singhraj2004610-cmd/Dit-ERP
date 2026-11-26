@@ -1,14 +1,23 @@
 import logo from "./assets/Ditlogo.png";
 import OutLook from "./pages/login";
-import TopHeader from './mainDashboard.jsx';
+import StudentDashboard from "./Components/Student/StudentDashboard";
+import DDashboard from "./Components/Department/DDashboard";
 import { useState } from "react";
 function LoginPage() {
   const [isOutlookOpen, setIsOutlookOpen] = useState(false);
-  const [showDashboard, setShowDashboard] = useState(false);
+  const [auth, setAuth] = useState(null); // { role, name, email, id } or null
 
-  if (showDashboard) {
-  return <TopHeader onLogout={() => setShowDashboard(false)} />;
-}
+  const handleLogout = () => {
+    setAuth(null);
+    setIsOutlookOpen(false);
+  };
+
+  if (auth?.role === "student") {
+    return <StudentDashboard user={auth} onLogout={handleLogout} />;
+  }
+  if (auth?.role === "department") {
+    return <DDashboard user={auth} onLogout={handleLogout} />;
+  }
   return (
     <div className="min-h-screen w-full bg-[url('./assets/unison-group3.webp')] bg-cover bg-center bg-no-repeat flex items-center justify-center font-sans antialiased relative">
       <div className="flex flex-col md:flex-row min-h-screen w-full overflow-hidden bg-white/60">
@@ -81,7 +90,7 @@ function LoginPage() {
                   &times;
                 </button>
 
-                <OutLook onSelectPage={() => setIsOutlookOpen(false)}  onLoginSuccess={() => setShowDashboard(true)}/>
+                <OutLook onSelectPage={() => setIsOutlookOpen(false)}  onLoginSuccess={(user) => setAuth(user)}/>
               </div>
             </div>
           )}
