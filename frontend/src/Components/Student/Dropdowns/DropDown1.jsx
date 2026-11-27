@@ -5,6 +5,7 @@ function DropDown1({ onSelectPage, isOpen, onToggle, searchQuery = "" }) {
 
   const items = [
     { label: "Performance Indices", page: "performance" },
+    { label: "Attendance", page: "attendance" },
     { label: "My Courses", page: "myCourses" },
   ];
 

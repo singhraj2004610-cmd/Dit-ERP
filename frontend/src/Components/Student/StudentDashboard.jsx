@@ -6,6 +6,7 @@ import DropDown4 from "./Dropdowns/DropDown4.jsx";
 import DropDown5 from "./Dropdowns/DropDown5.jsx";
 import ADashboard from "./AlumniDashboard.jsx";
 import PerformanceIndices from "./PerformanceIndices.jsx";
+import Attendance from "./Attendance.jsx";
 import MyCourses from "./MyCourses.jsx";
 import GradeSheet from "./Gradesheet.jsx";
 import GStatus from "./GraduationStatus.jsx";
@@ -25,6 +26,7 @@ import OfferRep from "./placement/offerRep.jsx";
 const pageLabels = {
   dashboard: "Alumni Dashboard",
   performance: "Performance Indices",
+  attendance: "Attendance",
   myCourses: "My Courses",
   gradeSheet: "Grade Sheet",
   graduationState: "Graduation Status",
@@ -45,6 +47,7 @@ const pageLabels = {
 const pages = {
   dashboard: ADashboard,
   performance: PerformanceIndices,
+  attendance: Attendance,
   myCourses: MyCourses,
   gradeSheet: GradeSheet,
   graduationState: GStatus,

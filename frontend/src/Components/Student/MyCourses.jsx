@@ -1,4 +1,7 @@
+import ViewMarks from "./ViewMarks";
+import React, { useState } from 'react';
 function MyCourse() {
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const CourseData = [
     {
       sno: 1,
@@ -150,7 +153,7 @@ function MyCourse() {
       status: "Failed",
       Cstatus: "VIEW MARKS",
     },
-     ];
+  ];
   return (
     <div className="mx-20 border-y-4 p-4 shadow-xl">
       <h1 className="text-center underline text-xl">My Courses</h1>
@@ -226,10 +229,7 @@ function MyCourse() {
                 </td>
                 <td className="border-r border-slate-300">{course.date}</td>
                 <td className="border-r border-slate-300">
-                  <a
-                    href="#"
-                    className="text-blue-500 font-bold underline"
-                  >
+                  <a href="#" className="text-blue-500 font-bold underline">
                     {course.scheme}
                   </a>
                 </td>
@@ -237,7 +237,11 @@ function MyCourse() {
                 <td className="">
                   <a
                     href="#"
-                    className="text-blue-500 font-bold underline"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelectedCourse(course);
+                    }}
+                    className="text-blue-500 font-bold underline cursor-pointer"
                   >
                     {course.Cstatus}
                   </a>
@@ -246,6 +250,7 @@ function MyCourse() {
             ))}
           </tbody>
         </table>
+      <ViewMarks course={selectedCourse} onClose={() => setSelectedCourse(null)} />
       </div>
     </div>
   );
